@@ -195,3 +195,6 @@ async def chat_stream(message: str, checkpoint_id: Optional[str] = Query(None)):
     )
 
 # SSE - server-sent events 
+@app.get("/")
+async def root():
+    return {"message": "FastAPI is running", "endpoints": ["/chat_stream/{message}"]}
