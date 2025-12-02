@@ -318,7 +318,10 @@ const Home: React.FC = () => {
         ]);
 
         // Create URL with checkpoint ID if it exists
-        let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/chat_stream/${encodeURIComponent(userInput)}`;
+        // let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/chat_stream/${encodeURIComponent(userInput)}`;
+        const base = process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/+$/, "") ?? "";
+        let url = `${base}/chat_stream/${encodeURIComponent(userInput)}`;
+
         if (checkpointId) {
           url += `?checkpoint_id=${encodeURIComponent(checkpointId)}`;
         }
