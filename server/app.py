@@ -209,7 +209,7 @@ from langchain_core.messages import HumanMessage, AIMessageChunk, ToolMessage
 from langchain_community.tools.tavily_search import TavilySearchResults
 from langgraph.graph import add_messages, StateGraph, END
 from langgraph.checkpoint.memory import MemorySaver
-from langchain_groq import ChatGroq
+
 from fastapi import FastAPI, Query
 from fastapi.responses import StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
@@ -234,9 +234,10 @@ search_tool = TavilySearchResults(max_results=4)
 tools = [search_tool]
 
 llm = ChatOpenAI(
-    model="llama-3.1-8b-instant",
+    model="deepseek/deepseek-r1",
     api_key=OPENROUTER_API_KEY,
-    groq_api_key=os.getenv("GROQ_API_KEY"),
+    base_url="https://openrouter.ai/api/v1",
+    temperature=0.2,
 )
 
 llm_with_tools = llm.bind_tools(tools=tools)
